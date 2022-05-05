@@ -133,7 +133,7 @@ func resourceNetboxAvailablePrefixCreate(d *schema.ResourceData, m interface{}) 
 		return err
 	}
 
-	payload := res.GetPayload()
+	payload := res.GetPayload()[0]
 	d.SetId(strconv.FormatInt(payload.ID, 10))
 	d.Set("prefix", payload.Prefix)
 

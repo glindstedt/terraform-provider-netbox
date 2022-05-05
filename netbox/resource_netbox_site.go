@@ -108,7 +108,7 @@ func resourceNetboxSiteCreate(d *schema.ResourceData, m interface{}) error {
 
 	asnValue, ok := d.GetOk("asn")
 	if ok {
-		data.Asn = int64ToPtr(int64(asnValue.(int)))
+		data.Asns = append(data.Asns, int64(asnValue.(int)))
 	}
 
 	data.Tags, _ = getNestedTagListFromResourceDataSet(api, d.Get("tags"))
@@ -147,7 +147,7 @@ func resourceNetboxSiteRead(d *schema.ResourceData, m interface{}) error {
 	d.Set("status", res.GetPayload().Status.Value)
 	d.Set("description", res.GetPayload().Description)
 	d.Set("facility", res.GetPayload().Facility)
-	d.Set("asn", res.GetPayload().Asn)
+	d.Set("asn", res.GetPayload().Asns[0])
 
 	if res.GetPayload().Region != nil {
 		d.Set("region_id", res.GetPayload().Region.ID)
@@ -202,7 +202,7 @@ func resourceNetboxSiteUpdate(d *schema.ResourceData, m interface{}) error {
 
 	asnValue, ok := d.GetOk("asn")
 	if ok {
-		data.Asn = int64ToPtr(int64(asnValue.(int)))
+		data.Asns = append(data.Asns, int64(asnValue.(int)))
 	}
 
 	data.Tags, _ = getNestedTagListFromResourceDataSet(api, d.Get("tags"))

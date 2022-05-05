@@ -12,6 +12,8 @@ require (
 	github.com/stretchr/testify v1.7.1
 )
 
+replace github.com/fbreckle/go-netbox => github.com/glindstedt/go-netbox v0.0.0-ugly-hack
+
 require (
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
